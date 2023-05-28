@@ -1,0 +1,62 @@
+---
+import Container from "@components/container.astro";
+import Link from "@components/ui/link.astro";
+import Dropdown from "./dropdown.astro";
+import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import type { record } from "astro/zod";
+
+const menuitems = [
+  {
+    title: "About",
+    path: "/",
+  },
+  {
+    title: "Blog",
+    path: "/blog",
+  },
+  {
+    title: "Contact",
+    path: "/contact",
+  },
+];
+---
+
+<header>
+  <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <div class="flex md:flex-1">
+      <a href="#" class="-m-1.5 p-1.5">
+        <a href="/" class="text-md">
+          <span class="font-bold text-slate-800">Johan</span>
+          <span class="text-slate-500">Benschop</span>
+        </a>
+      </a>
+    </div>
+
+    <div class="flex md:hidden">
+      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+        <span class="sr-only">Open main menu</span>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="hidden md:flex md:gap-x-12">
+      {
+        menuitems.map((item) => (
+            <a href={item.path} class="text-sm font-semibold leading-6 text-gray-900"> {item.title}</a>
+        ))
+      }
+    </div>
+
+    <div class="hidden md:flex md:flex-1 md:justify-end">
+      <a class="text-sm leading-6 text-gray-400">GNDN</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  a {
+    color: #0d1730;
+  }
+</style>

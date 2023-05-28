@@ -1,0 +1,63 @@
+---
+import { Picture } from "@astrojs/image/components";
+import heroImage from "assets/astronaut-idea.svg";
+import Link from "@components/ui/link.astro";
+import { Icon } from "astro-icon";
+---
+
+<main
+  class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24"
+>
+  <div class="py-6 md:order-1 hidden md:block">
+    <Picture
+      src={heroImage}
+      alt="Astronaut in the air"
+      widths={[200, 400, 600]}
+      sizes="(max-width: 400px) 100vw, 420px"
+      loading="eager"
+      format="avif"
+    />
+  </div>
+  <div>
+    <h1
+      class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter"
+    >
+      Welcome to my small corner of the internet!
+    </h1>
+    <p class="text-xl mt-4 text-slate-800 max-w-xl">
+      I'm a passionate software developer with a proven track record in
+      delivering exceptional results. Allow me to share my professional journey
+      and highlight the expertise that sets me apart.
+    </p><p class="text-lg mt-4 text-slate-600 max-w-xl">
+      I embarked on my software development career in September 2015, joining
+      Indivirtual. During my time there, I had the opportunity to showcase my
+      skills and successfully completed my graduation assignment from Fontys
+      Hogeschool in Eindhoven from February 2015 to July 2015.
+    </p><p class="text-lg mt-4 text-slate-600 max-w-xl">
+      Since June 2018, I've been working as a consultant for Indivirtual at
+      Stichting Slachtofferhulp. What initially began as temporary support
+      during the summer quickly evolved into long-term collaborations, leading
+      to my current permanent position as a valued member of the team, starting
+      from August 2022.
+    </p><p class="text-lg mt-4 text-slate-600 max-w-xl">
+      Known for my drive and eagerness, I thrive on tackling new challenges and
+      staying ahead of the curve in the ever-evolving world of technology.
+      Colleagues and friends commend my ability to grasp new concepts swiftly,
+      enabling me to make significant contributions to projects.
+    </p>
+
+    <div class="mt-6 flex flex-col sm:flex-row gap-3">
+      <Link
+        size="lg"
+        style="outline"
+        href="#"
+        href="/blog"
+        target="_blank"
+        class="flex gap-1 items-center justify-center"
+        rel="noopener"
+      >
+        Explore my blog
+      </Link>
+    </div>
+  </div>
+</main>

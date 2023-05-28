@@ -1,36 +1,86 @@
 ---
+import { SEO } from "astro-seo";
+import Footer from "@components/footer.astro";
+import Navbar from "@components/navbar/navbar.astro";
+// import "@fontsource/inter/variable.css";
+import "@fontsource/montserrat";
+
 export interface Props {
-	title: string;
+  title: string;
 }
 
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const resolvedImageWithDomain = new URL(
+  "/opengraph.jpg",
+  Astro.site
+).toString();
+
 const { title } = Astro.props;
+
+const makeTitle = title ? `${title} | Johan Benschop`: "Johan Benschop";
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
+    <SEO
+      title={makeTitle}
+      description="Blog of Johan Benschop, a software engineer from the Netherlands."
+      canonical={canonicalURL}
+      twitter={{
+        creator: "@joh739",
+        card: "summary_large_image",
+      }}
+      openGraph={{
+        basic: {
+          url: canonicalURL,
+          type: "website",
+          title: `Blog of Johan Benschop, a software engineer from the Netherlands.`,
+          image: resolvedImageWithDomain,
+        },
+        image: {
+          alt: "Screenshot of the homepage",
+        },
+      }}
+    />
+  </head>
+  <body>
+    <Navbar />
+    <slot />
+    <Footer />
+    <style is:global>
+      :root {
+        --accent: 124, 58, 237;
+        /* --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%); */
+        --accent-gradient: radial-gradient(circle, rgba(43,77,162,1) 0%, rgba(23,41,86,1) 100%, rgba(43,77,162,1) 100%);
+
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      body {
+        background-color: #fafafa;
+        background-image: linear-gradient(90deg, rgba(250,250,250,1) 10%, rgba(255,255,255,1) 100%);
+      }
+
+      h1 {
+        background-image: var(--accent-gradient);
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+      }
+
+      /* Improve Page speed */
+      /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
+      img {
+        content-visibility: auto;
+      }
+    </style>
+  </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>
